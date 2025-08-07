@@ -1,0 +1,175 @@
+body {
+  background-color: #FCFFF5; 
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #DBDAAF; 
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  color: #48521C; 
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+input, textarea {
+  padding: 10px;
+  border: 1px solid #999F54; 
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: white;
+}
+
+button {
+  padding: 12px;
+  background-color: #48521C; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #364012; 
+}
+
+.activity-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.activity-list li {
+  background-color: #FCFFF5; 
+  padding: 10px 14px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-list li button {
+  background-color: #999F54; 
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.activity-list li button:hover {
+  background-color: #7d8542; 
+}
+
+.home-screen {
+  max-width: 600px;
+  margin: 100px auto;
+  text-align: center;
+  padding: 40px;
+  background-color: #DBDAAF; 
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.home-screen h1 {
+  color: #48521C; 
+  margin-bottom: 20px;
+}
+
+.home-screen p {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.home-screen button {
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #48521C; 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.home-screen button:hover {
+  background-color: #364012;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #dcedc8; 
+  min-height: 100vh;
+  color: #333;
+}
+
+
+.app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  margin-top: 40px;
+}
+
+button {
+  background-color: #48521C;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3a430f; 
+}
+
+
+input,
+textarea,
+select {
+  display: block;
+  width: 100%;
+  margin: 8px 0 16px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+li {
+  background-color: #f1f8e9; 
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  list-style: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+
