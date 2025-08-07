@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
-import { useState } from 'react';
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -13,9 +12,21 @@ function App() {
   const [duration, setDuration] = useState('');
   const [activities, setActivities] = useState([]);
 
-  const handleDelete = (indexToDelete) => {
-    const updatedActivities = activities.filter((_, index) => index !== indexToDelete);
-    setActivities(updatedActivities);
+  useEffect(() => {
+    fetch('http://localhost:8080/activities')
+      .then(res => res.json())
+      .then(data => setActivities(data))
+      .catch(err => console.error('Error fetching activities:', err));
+  }, []);
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:8080/activities/${id}`, {
+      method: 'DELETE',
+    })
+      .then(() => {
+        setActivities(activities.filter((activity) => activity.id !== id));
+      })
+      .catch(err => console.error('Error deleting activity:', err));
   };
 
   const handleSubmit = (e) => {
@@ -34,13 +45,27 @@ function App() {
       duration,
     };
 
-    setActivities([...activities, newActivity]);
-    setName('');
-    setDescription('');
-    setCategory('');
-    setDate('');
-    setDuration('');
+    fetch('http://localhost:8080/activities', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newActivity),
+    })
+      .then(res => res.json())
+      .then(savedActivity => {
+        setActivities([...activities, savedActivity]);
+        setName('');
+        setDescription('');
+        setCategory('');
+        setDate('');
+        setDuration('');
+      })
+      .catch(err => console.error('Error posting activity:', err));
   };
+
+  function formatDate(dateString) {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
 
   if (showHomeScreen) {
     return (
@@ -51,12 +76,6 @@ function App() {
       </div>
     );
   }
-
-  function formatDate(dateString) {
-  const options = { day: 'numeric', month: 'long', year: 'numeric' };
-  return new Date(dateString).toLocaleDateString(undefined, options);
-}
-
 
   return (
     <div className="app-container">
@@ -114,52 +133,51 @@ function App() {
         </div>
       )}
 
-{view === 'list' && (
-  <div className="activity-list">
-    <h2>Activities</h2>
+      {view === 'list' && (
+        <div className="activity-list">
+          <h2>Activities</h2>
 
-    {activities.length > 0 && (
-      <div style={{ marginBottom: '15px' }}>
-        <label style={{ marginRight: '10px' }}>Filter by Category:</label>
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          <option value="All">All</option>
-          {[...new Set(activities.map(a => a.category))].map((cat, index) => (
-            <option key={index} value={cat}>{cat}</option>
-          ))}
-        </select>
-      </div>
-    )}
-
-    {activities.length === 0 ? (
-      <p>No activities yet.</p>
-    ) : (
-      <ul>
-        {activities
-          .filter(activity => selectedCategory === 'All' || activity.category === selectedCategory)
-          .map((activity, index) => (
-            <li key={index} style={{ marginBottom: '10px' }}>
-              <strong>{activity.name}</strong>
-              <br />
-              {formatDate(activity.date)} • {activity.duration} mins
-              <br />
-              <button
-                onClick={() => handleDelete(index)}
-                style={{ marginTop: '5px' }}
+          {activities.length > 0 && (
+            <div style={{ marginBottom: '15px' }}>
+              <label style={{ marginRight: '10px' }}>Filter by Category:</label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
               >
-                Delete
-              </button>
-            </li>
-        ))}
-      </ul>
-    )}
-  </div>
-)}
+                <option value="All">All</option>
+                {[...new Set(activities.map(a => a.category))].map((cat, index) => (
+                  <option key={index} value={cat}>{cat}</option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {activities.length === 0 ? (
+            <p>No activities yet.</p>
+          ) : (
+            <ul>
+              {activities
+                .filter(activity => selectedCategory === 'All' || activity.category === selectedCategory)
+                .map((activity, index) => (
+                  <li key={index} style={{ marginBottom: '10px' }}>
+                    <strong>{activity.name}</strong>
+                    <br />
+                    {formatDate(activity.date)} • {activity.duration} mins
+                    <br />
+                    <button
+                      onClick={() => handleDelete(activity.id)}
+                      style={{ marginTop: '5px' }}
+                    >
+                      Delete
+                    </button>
+                  </li>
+                ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   );
 }
 
 export default App;
-
