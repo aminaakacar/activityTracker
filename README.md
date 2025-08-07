@@ -1,6 +1,6 @@
 # Activity Tracker
 
-**Activity Tracker** je enostavna spletna aplikacija, ki uporabnikom omogoča sledenje svojim prostim aktivnostim, kot so branje, igranje iger, kuhanje in podobno. Aplikacija je razvita kot del študijskega projekta in vključuje tako frontend kot backend del.
+**Activity Tracker** je enostavna spletna aplikacija, ki uporabnikom omogoča sledenje svojim prostim aktivnostim, kot so branje, igranje iger, kuhanje in podobno. Aplikacija vključuje tako frontend kot backend del.
 
 ## Funkcionalnosti
 - Dodajanje aktivnosti
